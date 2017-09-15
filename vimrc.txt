@@ -1,0 +1,57 @@
+set shell=/bin/bash
+
+" Set syntax highlighting on
+syntax on
+
+" Do something special for GVim and make it purdy
+if has("gui_running") || has("gui_gtk2")
+ colorscheme desert
+ set  guifont=Monospace\ 12
+ set hlsearch
+endif
+
+" Show Numbers
+"set number
+set relativenumber
+
+" Set modeline
+set modeline
+
+" Replace tabs with 2 spaces
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set smarttab
+
+" If you search for an all-lowercase string your search will be case-insensitive,
+" but if one or more characters is uppercase the search will be case-sensitive.
+set ignorecase
+set smartcase
+
+" Global subtitions by default
+set gdefault
+
+" Smarter searching
+set incsearch
+set showmatch
+set hlsearch
+
+" Handle long lines ...
+set wrap
+set textwidth=79
+set formatoptions=qrn1
+set colorcolumn=85
+
+
+" Self explainatory
+set noundofile
+
+" Unbind the cursor keys in insert, normal and visual modes.
+for prefix in ['i', 'n', 'v']
+  for key in ['<Up>', '<Down>', '<Left>', '<Right>']
+    exe prefix . "noremap " . key . " <Nop>"
+  endfor
+endfor
+
+" disable auto-comments
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
