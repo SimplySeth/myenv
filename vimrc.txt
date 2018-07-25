@@ -1,18 +1,62 @@
-set shell=/bin/bash
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+" This must be installed
+Plugin 'VundleVim/Vundle.vim'
+
+" All other plugins ...
+Plugin 'ansible-vim'
+Plugin 'Efficient-python-folding'
+Plugin 'hashivim/vim-terraform'
+Plugin 'itchyny/lightline.vim'
+Plugin 'janitor.vim'
+Plugin 'Jinja'
+Plugin 'Markdown-syntax'
+Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'othree/html5.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'vim-es6'
+Plugin 'vim-json-bundle'
+Plugin 'vim-python-virtualenv'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'yaml.vim'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+" for the status bar
+set laststatus=2
+
+" for Nerd Tree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Set syntax highlighting on
 syntax on
 
-" Do something special for GVim and make it purdy
+" Set theme
+set background=dark
+colorscheme PaperColor
+
+" Do something special for GVim/MacVim
 if has("gui_running") || has("gui_gtk2")
- colorscheme desert
- set  guifont=Monospace\ 12
+ set  guifont=Menlo\ Regular:18
  set hlsearch
 endif
 
+
 " Show Numbers
-"set number
 set relativenumber
+set number
 
 " Set modeline
 set modeline
@@ -42,16 +86,8 @@ set textwidth=79
 set formatoptions=qrn1
 set colorcolumn=85
 
-
 " Self explainatory
 set noundofile
-
-" Unbind the cursor keys in insert, normal and visual modes.
-for prefix in ['i', 'n', 'v']
-  for key in ['<Up>', '<Down>', '<Left>', '<Right>']
-    exe prefix . "noremap " . key . " <Nop>"
-  endfor
-endfor
 
 " disable auto-comments
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
