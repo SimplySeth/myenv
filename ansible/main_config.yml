@@ -1,0 +1,40 @@
+---
+- name: MacOS Provision
+  hosts: localhost
+  connection: local
+  gather_facts: true
+
+  vars:
+    macos_computer_name: "dadsmac001"
+    macos_local_host_name: "dadsmac001"
+    macos_host_name: "dadsmac001"
+    macos_search_domain: "priv.crizzle.lan"
+    brew_bundle_cleanup: false
+
+  roles:
+    # command line tools first 
+    - role: macos_clt_install
+    
+    # Homebrew 
+    - role: macos_brew_install
+
+    # Install brew packages
+    - role: macos_brew_bundle
+
+    # GCloud CLI
+    - role: macos_gcloud_install
+
+    # Set hostname
+    - role: macos_hostname
+
+    # Oh My ZSH
+    - role: macos_oh_my_zsh
+
+    # Vundle install
+    - role: macos_vundle_install
+
+    # NVChad 
+    - macos_nvchad_multi
+      
+
+

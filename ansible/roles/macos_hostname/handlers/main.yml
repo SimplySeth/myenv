@@ -1,0 +1,8 @@
+---
+- name: Flush DNS cache
+  ansible.builtin.command: "{{ item }}"
+  loop:
+    - dscacheutil -flushcache
+    - killall -HUP mDNSResponder
+  become: true
+  changed_when: true

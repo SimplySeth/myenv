@@ -1,0 +1,48 @@
+---
+- name: Check current ComputerName
+  ansible.builtin.command: scutil --get ComputerName
+  register: current_computer_name
+  changed_when: false
+  failed_when: false
+
+- name: Set ComputerName
+  ansible.builtin.command: scutil --set ComputerName "{{ macos_computer_name }}"
+  become: true
+  when: current_computer_name.stdout != macos_computer_name
+  notify: Flush DNS cache
+
+- name: Check current LocalHostName
+  ansible.builtin.command: scutil --get LocalHostName
+  register: current_local_host_name
+  changed_when: false
+  failed_when: false
+
+- name: Set LocalHostName
+  ansible.builtin.command: scutil --set LocalHostName "{{ macos_local_host_name }}"
+  become: true
+  when: current_local_host_name.stdout != macos_local_host_name
+  notify: Flush DNS cache
+
+- name: Check current HostName
+  ansible.builtin.command: scutil --get HostName
+  register: current_host_name
+  changed_when: false
+  failed_when: false
+
+- name: Set HostName (FQDN)
+  ansible.builtin.command: scutil --set HostName "{{ macos_host_name }}"
+  become: true
+  when: current_host_name.stdout != macos_host_name
+  notify: Flush DNS cache
+
+- name: Check current DNS search domains
+  ansible.builtin.command: networksetup -getsearchdomains "{{ macos_network_service }}"
+  register: current_search_domains
+  changed_when: false
+  failed_when: false
+
+- name: Configure DNS search domain
+  ansible.builtin.command: networksetup -setsearchdomains "{{ macos_network_service }}" "{{ macos_search_domain }}"
+  become: true
+  when: current_search_domains.stdout is not defined or macos_search_domain not in current_search_domains.stdout
+  notify: Flush DNS cache

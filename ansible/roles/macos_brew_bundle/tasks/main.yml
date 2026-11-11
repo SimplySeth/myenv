@@ -1,0 +1,23 @@
+---
+- name: Ensure Homebrew is installed
+  ansible.builtin.stat:
+    path: /opt/homebrew/bin/brew
+  register: homebrew_check
+  tags:
+    - brew
+
+- name: Fail if Homebrew is missing
+  ansible.builtin.fail:
+    msg: "Homebrew is not installed. Please install Homebrew first before running this role."
+  when: not homebrew_check.stat.exists
+
+- name: Run brew bundle install using the provided Brewfile
+  ansible.builtin.command: >
+    brew bundle install --file="{{ brewfile_path }}"
+    {% if brew_bundle_cleanup | bool %}--cleanup{% endif %}
+  register: brew_bundle_result
+  changed_when: "'No changes' not in brew_bundle_result.stdout"
+  environment:
+    PATH: "/opt/homebrew/bin:/usr/local/bin:{{ ansible_env.PATH }}"
+  tags:
+    - brew

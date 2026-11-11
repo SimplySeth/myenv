@@ -1,0 +1,51 @@
+---
+- name: Check if Xcode Command Line Tools are already installed
+  ansible.builtin.command: xcode-select -p
+  register: xcode_select_check
+  changed_when: false
+  failed_when: false
+
+- name: Create on-demand trigger placeholder file
+  ansible.builtin.file:
+    path: /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+    state: touch
+    mode: '0644'
+  become: true
+  when: xcode_select_check.rc != 0 or macos_clt_force_install | bool
+
+- name: Find available Xcode Command Line Tools package label
+  ansible.builtin.shell: |
+    set -o pipefail
+    softwareupdate -l | grep -B 1 -E "Command Line Tools" | head -n 1 | awk -F'*' '{print $2}' | sed -e 's/^ *//' | tr -d '\n'
+  register: clt_update_label
+  changed_when: false
+  failed_when: false
+  args:
+    executable: /bin/bash
+  when: xcode_select_check.rc != 0 or macos_clt_force_install | bool
+
+- name: Install Xcode Command Line Tools via softwareupdate
+  ansible.builtin.command: "softwareupdate -i '{{ clt_update_label.stdout }}' --agree-to-license"
+  become: true
+  register: clt_install_result
+  changed_when: clt_install_result.rc == 0
+  when:
+    - (xcode_select_check.rc != 0 or macos_clt_force_install | bool)
+    - clt_update_label.stdout is defined
+    - clt_update_label.stdout | length > 0
+
+- name: Remove trigger placeholder file
+  ansible.builtin.file:
+    path: /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+    state: absent
+  become: true
+  when: xcode_select_check.rc != 0 or macos_clt_force_install | bool
+
+- name: Verify active Command Line Tools developer path
+  ansible.builtin.command: xcode-select -p
+  register: xcode_select_path
+  changed_when: false
+
+- name: Display active developer path
+  ansible.builtin.debug:
+    msg: "Xcode CLI Tools active at: {{ xcode_select_path.stdout }}"

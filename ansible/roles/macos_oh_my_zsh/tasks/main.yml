@@ -1,0 +1,57 @@
+---
+- name: Ensure git and zsh are installed
+  ansible.builtin.command: which {{ item }}
+  loop:
+    - git
+    - zsh
+  register: prerequisite_check
+  changed_when: false
+  failed_when: prerequisite_check.rc != 0
+
+- name: Clone Oh My Zsh repository
+  ansible.builtin.git:
+    repo: "{{ oh_my_zsh_repo }}"
+    dest: "{{ oh_my_zsh_dest }}"
+    depth: 1
+    update: false
+  become_user: "{{ oh_my_zsh_user }}"
+
+- name: Check if .zshrc exists
+  ansible.builtin.stat:
+    path: "{{ oh_my_zsh_user_home }}/.zshrc"
+  register: zshrc_stat
+
+- name: Create default .zshrc from template if missing
+  ansible.builtin.copy:
+    src: "{{ oh_my_zsh_dest }}/templates/zshrc.zsh-template"
+    dest: "{{ oh_my_zsh_user_home }}/.zshrc"
+    remote_src: true
+    mode: '0644'
+    owner: "{{ oh_my_zsh_user }}"
+  when: not zshrc_stat.stat.exists
+
+- name: Set ZSH_THEME in .zshrc
+  ansible.builtin.lineinfile:
+    path: "{{ oh_my_zsh_user_home }}/.zshrc"
+    regexp: '^ZSH_THEME='
+    line: 'ZSH_THEME="{{ oh_my_zsh_theme }}"'
+    backup: true
+
+- name: Set plugins in .zshrc
+  ansible.builtin.lineinfile:
+    path: "{{ oh_my_zsh_user_home }}/.zshrc"
+    regexp: '^plugins=\('
+    line: "plugins=({{ oh_my_zsh_plugins | join(' ') }})"
+
+- name: Get current default shell for target user
+  ansible.builtin.command: dscl . -read /Users/{{ oh_my_zsh_user }} UserShell
+  register: current_user_shell
+  changed_when: false
+  failed_when: false
+
+- name: Set default shell to Zsh if required
+  ansible.builtin.command: chsh -s /bin/zsh {{ oh_my_zsh_user }}
+  become: true
+  when:
+    - oh_my_zsh_change_default_shell | bool
+    - "'/bin/zsh' not in current_user_shell.stdout"

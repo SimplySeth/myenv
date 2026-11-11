@@ -1,0 +1,71 @@
+---
+- name: Ensure vim and git are installed
+  ansible.builtin.command: which {{ item }}
+  loop:
+    - vim
+    - git
+  register: prerequisite_check
+  changed_when: false
+  failed_when: prerequisite_check.rc != 0
+
+- name: Create ~/.vim/bundle directory if it does not exist
+  ansible.builtin.file:
+    path: "{{ vundle_user_home }}/.vim/bundle"
+    state: directory
+    owner: "{{ vundle_user }}"
+    mode: '0755'
+
+- name: Clone Vundle repository into ~/.vim/bundle/Vundle.vim
+  ansible.builtin.git:
+    repo: "{{ vundle_repo }}"
+    dest: "{{ vundle_dest }}"
+    depth: 1
+    update: true
+  become_user: "{{ vundle_user }}"
+
+- name: Check if .vimrc exists
+  ansible.builtin.stat:
+    path: "{{ vundle_user_home }}/.vimrc"
+  register: vimrc_stat
+
+- name: Create initial .vimrc with Vundle boilerplate if missing
+  ansible.builtin.copy:
+    dest: "{{ vundle_user_home }}/.vimrc"
+    content: |
+      set nocompatible
+      filetype off
+
+      set rtp+=~/.vim/bundle/Vundle.vim
+      call vundle#begin()
+
+      " Let Vundle manage Vundle, required
+      Plugin 'VundleVim/Vundle.vim'
+
+      " Add your plugins here, for example:
+      " Plugin 'tpope/vim-fugitive'
+
+      call vundle#end()
+      filetype plugin indent on
+    owner: "{{ vundle_user }}"
+    mode: '0644'
+  when: not vimrc_stat.stat.exists
+
+- name: Ensure Vundle init block exists in .vimrc if file already existed
+  ansible.builtin.blockinfile:
+    path: "{{ vundle_user_home }}/.vimrc"
+    marker: "\" {-- Ansible Vundle Boilerplate --"
+    block: |
+      set nocompatible
+      filetype off
+      set rtp+=~/.vim/bundle/Vundle.vim
+      call vundle#begin()
+      Plugin 'VundleVim/Vundle.vim'
+      call vundle#end()
+      filetype plugin indent on
+  when: vimrc_stat.stat.exists
+
+- name: Automatically install or update plugins via Vundle in batch mode
+  ansible.builtin.command: vim +PluginInstall +qall
+  become_user: "{{ vundle_user }}"
+  when: vundle_auto_install_plugins | bool
+  changed_when: false

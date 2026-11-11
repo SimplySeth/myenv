@@ -1,0 +1,6 @@
+---
+macos_computer_name: "mac001"
+macos_local_host_name: "mac001"
+macos_host_name: "mac001.priv.crizzle.lan"
+macos_network_service: "Wi-Fi"  # Change to "Ethernet" or your active interface if needed
+macos_search_domain: "priv.crizzle.lan"

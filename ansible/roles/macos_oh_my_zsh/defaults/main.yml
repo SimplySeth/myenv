@@ -1,0 +1,20 @@
+---
+# Target user for Oh My Zsh installation
+oh_my_zsh_user: "{{ ansible_user_id }}"
+oh_my_zsh_user_home: "{{ ansible_env.HOME }}"
+
+# Git repository URL for Oh My Zsh
+oh_my_zsh_repo: "https://github.com/ohmyzsh/ohmyzsh.git"
+oh_my_zsh_dest: "{{ oh_my_zsh_user_home }}/.oh-my-zsh"
+
+# Theme configuration
+oh_my_zsh_theme: "robbyrussell"
+
+# Plugins configuration
+oh_my_zsh_plugins:
+  - git
+  - zsh-autosuggestions
+  - zsh-syntax-highlighting
+
+# Automatically change default shell to zsh if not already set
+oh_my_zsh_change_default_shell: true

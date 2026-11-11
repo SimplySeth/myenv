@@ -1,0 +1,15 @@
+# Example Brewfile
+tap "homebrew/bundle"
+tap "homebrew/cask"
+
+# CLI Tools
+brew "git"
+brew "neovim"
+brew "ripgrep"
+brew "ansible"
+
+# Applications
+cask "iterm2"
+cask "visual-studio-code"
+cask "discord"
+

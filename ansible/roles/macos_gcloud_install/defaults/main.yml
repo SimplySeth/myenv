@@ -1,0 +1,3 @@
+---
+# Ensure Homebrew is available before attempting cask installation
+gcloud_cask_name: "google-cloud-sdk"

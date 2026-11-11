@@ -1,0 +1,25 @@
+---
+- name: Check if gcloud CLI is already installed
+  ansible.builtin.command: which gcloud
+  register: gcloud_which_check
+  changed_when: false
+  failed_when: false
+
+- name: Install Google Cloud SDK via Homebrew Cask
+  ansible.builtin.command: brew install --cask {{ gcloud_cask_name }}
+  when: gcloud_which_ch​eck.rc != 0
+  register: gcloud_install_result
+  changed_when: gcloud_install_result.rc == 0
+  environment:
+    PATH: "/opt/homebrew/bin:/usr/local/bin:{{ ansible_env.PATH }}"
+
+- name: Verify gcloud CLI installation
+  ansible.builtin.command: gcloud --version
+  register: gcloud_version
+  changed_when: false
+  environment:
+    PATH: "/opt/homebrew/bin:/usr/local/bin:{{ ansible_env.PATH }}"
+
+- name: Display installed gcloud version
+  ansible.builtin.debug:
+    msg: "{{ gcloud_version.stdout_lines[0] }}"

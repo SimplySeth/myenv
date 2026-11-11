@@ -1,0 +1,54 @@
+tap "hashicorp/tap"
+# Search tool like grep, but optimized for programmers
+brew "ack"
+# Manage your dotfiles across multiple diverse machines, securely
+brew "chezmoi"
+# GNU File, Shell, and Text utilities
+brew "coreutils"
+# GNU Emacs text editor
+brew "emacs"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# Distributed revision control system
+brew "git"
+# Open source programming language to build simple/reliable/efficient software
+brew "go"
+# GUI for vim, made for macOS
+brew "macvim"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
+# Open-source, cross-platform JavaScript runtime environment
+brew "node"
+# Tool for managing OCI containers and pods
+brew "podman"
+# Python version management
+brew "pyenv"
+# Pyenv plugin to manage virtualenv
+brew "pyenv-virtualenv"
+# Generic machine emulator and virtualizer
+brew "qemu"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# 7-Zip is a file archiver with a high compression ratio
+brew "sevenzip"
+# Display directories as trees (with optional color/HTML output)
+brew "tree"
+# Internet file retriever
+brew "wget"
+# UNIX shell (command interpreter)
+brew "zsh"
+# Packer
+brew "hashicorp/tap/packer", trusted: true
+# Desktop password and login vault
+cask "bitwarden"
+# Anthropic's official Claude AI desktop app
+cask "claude"
+# Terminal-based AI coding assistant
+cask "claude-code@latest"
+cask "font-devicons"
+# Browse, manage, inspect containers and images
+cask "podman-desktop"
+go "golang.org/x/tools/gopls"
+npm "bash-language-server"
