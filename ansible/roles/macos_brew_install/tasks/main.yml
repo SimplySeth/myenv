@@ -39,8 +39,4 @@
   ansible.builtin.debug:
     msg: "{{ macos_brew_install_homebrew_version.stdout_lines[0] }}"
 
-- name: Install chezmois
-  community.general.homebrew:
-    name: chezmoi
-    state: present
 ...
