@@ -1,10 +1,18 @@
 tap "hashicorp/tap"
 # Search tool like grep, but optimized for programmers
 brew "ack"
+# Open-source, cross-platform JavaScript runtime environment
+brew "node"
+# Language Server for Ansible Files
+brew "ansible-language-server"
+# Language Server for Bash
+brew "bash-language-server", link: false
 # Manage your dotfiles across multiple diverse machines, securely
 brew "chezmoi"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
+# Language server for Dockerfiles powered by Node, TypeScript, and VSCode
+brew "dockerfile-language-server"
 # GNU Emacs text editor
 brew "emacs"
 # Simple, fast and user-friendly alternative to find
@@ -15,12 +23,12 @@ brew "fzf"
 brew "git"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
+# Language server for the Go language
+brew "gopls"
 # GUI for vim, made for macOS
 brew "macvim"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
-# Open-source, cross-platform JavaScript runtime environment
-brew "node"
 # Tool for managing OCI containers and pods
 brew "podman"
 # Python version management
@@ -37,6 +45,8 @@ brew "sevenzip"
 brew "tree"
 # Internet file retriever
 brew "wget"
+# Language Server for Yaml Files
+brew "yaml-language-server"
 # UNIX shell (command interpreter)
 brew "zsh"
 # Packer
@@ -48,8 +58,10 @@ cask "claude"
 # Terminal-based AI coding assistant
 cask "claude-code@latest"
 cask "font-devicons"
+cask "font-jetbrains-mono-nerd-font"
+# Terminal emulator as alternative to Apple's Terminal app
+cask "iterm2"
 # Browse, manage, inspect containers and images
 cask "podman-desktop"
-go "golang.org/x/tools/gopls"
-npm "bash-language-server"
-brew "font-jetbrains-mono-nerd-font"
+# Open-source code editor
+cask "visual-studio-code"
