@@ -2,12 +2,20 @@
 - name: Install VS Code if not already installed
   community.general.homebrew_cask:
     name: visual-studio-code
-    state: present
+    state: installed
+
+- name: Check if deps are already installed
+  ansible.builtin.command:
+    cmd: "brew list {{ macos_vscode_config_deps | join(' ') }}"
+  register: macos_vscode_config_installed_deps
+  changed_when: false
+  failed_when: false
 
 - name: Install VS Code deps
   community.general.homebrew:
     name: "{{ macos_vscode_config_deps }}"
     state: present
+  when: macos_vscode_config_installed_deps.rc != 0
 
 - name: Get a list of installed VS Code extensions
   ansible.builtin.command:
