@@ -11,7 +11,7 @@
     state: touch
     mode: '0644'
   become: true
-  when: macos_clt_install_xcode_select_check.rc != 0 or macos_clt_force_install | bool
+  when: macos_clt_install_xcode_select_check.rc != 0
 
 - name: Find available Xcode Command Line Tools package label
   ansible.builtin.shell: |
