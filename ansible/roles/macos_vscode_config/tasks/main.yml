@@ -36,6 +36,4 @@
     mode: '0644'
     owner: "{{ ansible_env.LOGNAME }}"
     src: "files/settings.json"
-    state: file
-
 ...
