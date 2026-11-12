@@ -30,7 +30,7 @@
   register: macos_clt_install_result
   changed_when: macos_clt_install_result.rc == 0
   when:
-    - (macos_clt_install_xcode_select_check.rc != 0 or macos_clt_force_install | bool)
+    - (macos_clt_install_xcode_select_check.rc != 0 )
     - macos_clt_install_update_label.stdout is defined
     - macos_clt_install_update_label.stdout | length > 0
 
