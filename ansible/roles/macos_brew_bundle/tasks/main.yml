@@ -14,7 +14,7 @@
 - name: Run brew bundle install using the provided Brewfile
   ansible.builtin.command: >
     brew bundle install --file="{{ macos_brew_bundle_brewfile_path }}"
-    {% if macos_brew_bundle_cleanup: | bool %}--cleanup{% endif %}
+    {% if macos_brew_bundle_cleanup | bool %}--cleanup{% endif %}
   register: macos_brew_bundle_result
   changed_when: "'No changes' not in macos_brew_bundle_result.stdout"
   environment:
