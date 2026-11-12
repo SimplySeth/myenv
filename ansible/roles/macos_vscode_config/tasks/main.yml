@@ -1,6 +1,6 @@
 ---
 - name: Install VS Code if not already installed
-  ansible.builtin.brew:
+  community.general.homebrew:
     name: visual-studio-code
     state: present
 
