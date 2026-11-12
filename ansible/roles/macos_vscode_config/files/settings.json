@@ -1,0 +1,12 @@
+{
+    "workbench.startupEditor": "none",
+    "editor.fontSize": 16,
+    "workbench.preferredHighContrastColorTheme": "Dark 2026",
+    "ansible.lightspeed.enabled": false,
+    "ansible.lightspeed.suggestions.enabled": false,
+    "explorer.confirmDelete": false,
+    "files.autoSaveWhenNoErrors": true,
+    "workbench.iconTheme": "vscode-modern-icons",
+    "ansible.python.interpreterPath": "/usr/bin/python3",
+    "window.zoomLevel": 1
+}

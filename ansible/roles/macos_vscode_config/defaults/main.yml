@@ -1,0 +1,20 @@
+---
+macos_vscode_config_extensions:
+  - golang.go
+  - hashicorp.terraform
+  - ikbengeenrobot.ansible-variable-lookup
+  - mattiasbaake.vscode-snippets-for-ansible
+  - ms-python.debugpy
+  - ms-python.python
+  - ms-python.vscode-pylance
+  - ms-python.vscode-python-envs
+  - noxiz.jinja-snippets
+  - redhat.ansible
+  - redhat.vscode-yaml
+  - samuelcolvin.jinjahtml
+  - vscodevim.vim
+  - yzhang.markdown-all-in-one
+
+macos_vscode_config_deps:
+  - "ansible-lint"
+  - "yamllint"

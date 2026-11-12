@@ -38,3 +38,9 @@
 - name: Display Homebrew version
   ansible.builtin.debug:
     msg: "{{ homebrew_version.stdout_lines[0] }}"
+
+- name: Install chezmois
+  ansible.builtin.brew:
+    name: chezmoi
+    state: present
+ 

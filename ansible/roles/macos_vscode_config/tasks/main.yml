@@ -1,0 +1,33 @@
+---
+- name: Install VS Code if not already installed
+  ansible.builtin.brew:
+    name: visual-studio-code
+    state: present
+
+- name: Install VS Code deps
+  ansible.builtin.brew:
+    name: "{{ macos_vscode_config_deps }}"
+    state: present
+
+- name: Get a list of installed VS Code extensions
+  ansible.builtin.command:
+    cmd: "code --list-extensions"
+  register: macos_vscode_config_installed_extensions
+  changed_when: false
+
+- name: Install VS Code extensions
+  ansible.builtin.command:
+    cmd: "code --install-extension {{ item }}"
+  loop: "{{ macos_vscode_config_extensions }}"
+  when: item not in macos_vscode_config_installed_extensions.stdout_lines
+  changed_when: true
+
+- name: Set config file
+  ansible.builtin.copy:
+    dest: "{{ ansible_env.HOME }}/Library/Application Support/Code/User/settings.json"
+    mode: '0644'
+    owner: "{{ ansible_user }}"
+    src: "files/settings.json"
+    state: file
+
+...
