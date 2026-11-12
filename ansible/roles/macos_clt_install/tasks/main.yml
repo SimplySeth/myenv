@@ -39,7 +39,7 @@
     path: /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
     state: absent
   become: true
-  when: macos_clt_install_xcode_select_check.rc != 0 or macos_clt_force_install | bool
+  when: macos_clt_install_xcode_select_check.rc != 0
 
 - name: Verify active Command Line Tools developer path
   ansible.builtin.command: xcode-select -p
