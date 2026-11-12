@@ -11,7 +11,7 @@
     state: touch
     mode: '0644'
   become: true
-  when: macos_clt_install_xcode_select_check.rc != 0
+  when: macos_clt_install_xcode_select_check.rc != 0 or macos_clt_install_force_install | bool
 
 - name: Find available Xcode Command Line Tools package label
   ansible.builtin.shell: |
@@ -22,7 +22,7 @@
   failed_when: false
   args:
     executable: /bin/bash
-  when: macos_clt_install_xcode_select_check.rc != 0
+  when: macos_clt_install_xcode_select_check.rc != 0 or macos_clt_install_force_install | bool
 
 - name: Install Xcode Command Line Tools via softwareupdate
   ansible.builtin.command: "softwareupdate -i '{{ macos_clt_install_update_label.stdout }}' --agree-to-license"
@@ -30,7 +30,7 @@
   register: macos_clt_install_result
   changed_when: macos_clt_install_result.rc == 0
   when:
-    - (macos_clt_install_xcode_select_check.rc != 0 )
+    - (macos_clt_install_xcode_select_check.rc != 0 or macos_clt_install_force_install | bool)
     - macos_clt_install_update_label.stdout is defined
     - macos_clt_install_update_label.stdout | length > 0
 
@@ -39,7 +39,7 @@
     path: /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
     state: absent
   become: true
-  when: macos_clt_install_xcode_select_check.rc != 0
+  when: macos_clt_install_xcode_select_check.rc != 0 or macos_clt_install_force_install | bool
 
 - name: Verify active Command Line Tools developer path
   ansible.builtin.command: xcode-select -p
