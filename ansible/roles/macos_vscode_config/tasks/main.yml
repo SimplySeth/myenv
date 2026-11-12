@@ -34,7 +34,7 @@
   ansible.builtin.copy:
     dest: "{{ ansible_env.HOME }}/Library/Application Support/Code/User/settings.json"
     mode: '0644'
-    owner: "{{ ansible_user }}"
+    owner: "{{ ansible_env.LOGNAME }}"
     src: "files/settings.json"
     state: file
 
