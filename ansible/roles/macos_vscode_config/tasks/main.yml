@@ -5,7 +5,7 @@
     state: present
 
 - name: Install VS Code deps
-  ansible.builtin.brew:
+  community.general.homebrew:
     name: "{{ macos_vscode_config_deps }}"
     state: present
 
