@@ -40,7 +40,7 @@
     msg: "{{ homebrew_version.stdout_lines[0] }}"
 
 - name: Install chezmois
-  ansible.builtin.brew:
+  community.general.homebrew:
     name: chezmoi
     state: present
- 
+...
