@@ -1,6 +1,6 @@
 ---
 - name: Install VS Code if not already installed
-  community.general.homebrew:
+  community.general.homebrew_cask:
     name: visual-studio-code
     state: present
 
