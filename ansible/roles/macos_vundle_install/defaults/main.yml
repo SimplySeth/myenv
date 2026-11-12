@@ -1,11 +1,11 @@
 ---
 # Target user and home directory for Vundle installation
-vundle_user: "{{ ansible_user_id }}"
-vundle_user_home: "{{ ansible_env.HOME }}"
+macos_vundle_install_user: "{{ ansible_user_id }}"
+macos_vundle_install_user_home: "{{ ansible_env.HOME }}"
 
 # Vundle repository URL and destination path
-vundle_repo: "https://github.com/VundleVim/Vundle.vim.git"
-vundle_dest: "{{ vundle_user_home }}/.vim/bundle/Vundle.vim"
+macos_vundle_install_repo: "https://github.com/VundleVim/Vundle.vim.git"
+macos_vundle_install_dest: "{{ macos_vundle_install_user_home }}/.vim/bundle/Vundle.vim"
 
 # Whether to automatically run PluginInstall via vim on first setup
-vundle_auto_install_plugins: true
+macos_vundle_install_auto_install_plugins: true

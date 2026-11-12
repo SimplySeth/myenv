@@ -1,7 +1,6 @@
 ---
 # Path to your Brewfile. By default, it looks for the file bundled within the role.
-brewfile_path: "{{ role_path }}/files/Brewfile"
+macos_brew_bundle_brewfile_path: "{{ role_path }}/files/Brewfile"
 
 # Set to true if you want brew bundle to remove packages not listed in the Brewfile
-brew_bundle_cleanup: false
-
+macos_brew_bundle_cleanup: false

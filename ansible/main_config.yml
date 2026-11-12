@@ -21,5 +21,8 @@
     # Install brew packages
     - role: macos_brew_bundle
 
+    # Install vundle
+    - role: macos_vundle_install
+
     # VS Code configuration
     - role: macos_vscode_config

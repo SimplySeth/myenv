@@ -1,3 +1,3 @@
 ---
 # Control whether to force softwareupdate search even if xcode-select check fails
-macos_clt_force_install: false
+macos_clt_install_force_install: false

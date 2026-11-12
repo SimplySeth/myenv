@@ -4,9 +4,9 @@
   loop:
     - vim
     - git
-  register: prerequisite_check
+  register: macos_vundle_install_prerequisite_check
   changed_when: false
-  failed_when: prerequisite_check.rc != 0
+  failed_when: macos_vundle_install_prerequisite_check.rc != 0
 
 - name: Create ~/.vim/bundle directory if it does not exist
   ansible.builtin.file:
@@ -19,14 +19,16 @@
   ansible.builtin.git:
     repo: "{{ vundle_repo }}"
     dest: "{{ vundle_dest }}"
+    version: master
     depth: 1
     update: true
+  become: true
   become_user: "{{ vundle_user }}"
 
 - name: Check if .vimrc exists
   ansible.builtin.stat:
     path: "{{ vundle_user_home }}/.vimrc"
-  register: vimrc_stat
+  register: macos_vundle_install_vimrc_stat
 
 - name: Create initial .vimrc with Vundle boilerplate if missing
   ansible.builtin.copy:
@@ -48,7 +50,7 @@
       filetype plugin indent on
     owner: "{{ vundle_user }}"
     mode: '0644'
-  when: not vimrc_stat.stat.exists
+  when: not macos_vundle_install_vimrc_stat.stat.exists
 
 - name: Ensure Vundle init block exists in .vimrc if file already existed
   ansible.builtin.blockinfile:
@@ -62,10 +64,11 @@
       Plugin 'VundleVim/Vundle.vim'
       call vundle#end()
       filetype plugin indent on
-  when: vimrc_stat.stat.exists
+  when: macos_vundle_install_vimrc_stat.stat.exists
 
 - name: Automatically install or update plugins via Vundle in batch mode
   ansible.builtin.command: vim +PluginInstall +qall
+  become: true
   become_user: "{{ vundle_user }}"
   when: vundle_auto_install_plugins | bool
   changed_when: false
