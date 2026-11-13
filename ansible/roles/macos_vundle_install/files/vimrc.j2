@@ -1,0 +1,82 @@
+set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'digitalrounin/vim-yaml-folds'
+Plugin 'elzr/vim-json'
+Bundle 'ervandew/supertab'
+Bundle 'gabrielelana/vim-markdown'
+Plugin 'itchyny/lightline.vim'
+Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'Markdown-Syntax'
+Plugin 'NLKNguyen/papercolor-theme'
+Bundle 'scrooloose/nerdtree'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'vim-json-bundle'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'yaml.vim'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+"
+" for the status bar
+set laststatus=2
+
+" for Nerd Tree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" Set syntax highlighting on
+syntax on
+
+" Set theme
+set background=dark
+colorscheme PaperColor
+
+" Do something special for GVim/MacVim
+if has("gui_running") || has("gui_gtk2")
+ set  guifont=Menlo\ Regular:18
+ set hlsearch
+endif
+
+" Show Numbers
+set relativenumber
+set number
+
+" Set modeline
+set modeline
+
+" Replace tabs with 2 spaces
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set smarttab
+
+" If you search for an all-lowercase string your search will be case-insensitive,
+" but if one or more characters is uppercase the search will be case-sensitive.
+set ignorecase
+set smartcase
+
+" Global subtitions by default
+set gdefault
+
+" Smarter searching
+set incsearch
+set showmatch
+set hlsearch
+
+" Handle long lines ...
+set wrap
+set textwidth=79
+set formatoptions=qrn1
+set colorcolumn=85
+
+" Self explainatory
+set noundofile
+
+" disable auto-comments
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o

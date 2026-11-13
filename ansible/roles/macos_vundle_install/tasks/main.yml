@@ -31,40 +31,12 @@
   register: macos_vundle_install_vimrc_stat
 
 - name: Create initial .vimrc with Vundle boilerplate if missing
-  ansible.builtin.copy:
+  ansible.builtin.template:
+    src: files/vimrc.j2
     dest: "{{ macos_vundle_install_user_home }}/.vimrc"
-    content: |
-      set nocompatible
-      filetype off
-
-      set rtp+=~/.vim/bundle/Vundle.vim
-      call vundle#begin()
-
-      " Let Vundle manage Vundle, required
-      Plugin 'VundleVim/Vundle.vim'
-
-      " Add your plugins here, for example:
-      " Plugin 'tpope/vim-fugitive'
-
-      call vundle#end()
-      filetype plugin indent on
     owner: "{{ macos_vundle_install_user }}"
     mode: '0644'
   when: not macos_vundle_install_vimrc_stat.stat.exists
-
-- name: Ensure Vundle init block exists in .vimrc if file already existed
-  ansible.builtin.blockinfile:
-    path: "{{ macos_vundle_install_user_home }}/.vimrc"
-    marker: "\" {-- Ansible Vundle Boilerplate --"
-    block: |
-      set nocompatible
-      filetype off
-      set rtp+=~/.vim/bundle/Vundle.vim
-      call vundle#begin()
-      Plugin 'VundleVim/Vundle.vim'
-      call vundle#end()
-      filetype plugin indent on
-  when: macos_vundle_install_vimrc_stat.stat.exists
 
 - name: Automatically install or update plugins via Vundle in batch mode
   ansible.builtin.command: vim +PluginInstall +qall
