@@ -26,23 +26,11 @@
     mode: '0755'
   loop: "{{ macos_nvchad_multi_targets | ansible.builtin.dict2items }}"
 
-- name: Check if NvChad configuration target already exists
-  ansible.builtin.stat:
-    path: "{{ item.value.dest }}"
-  register: macos_nvchad_multi_path_stats
-  loop: "{{ macos_nvchad_multi_targets | ansible.builtin.dict2items }}"
-
 - name: Clone NvChad starter repository into target configurations
-  ansible.builtin.git:
-    repo: "{{ macos_nvchad_multi_nvchad_repo_url }}"
-    dest: "{{ item.value.dest }}"
-    version: master
-    depth: 1
-    update: false
-  become: true
-  become_user: "{{ macos_nvchad_multi_user }}"
+  ansible.builtin.include_tasks: clone_dir.yml
   loop: "{{ macos_nvchad_multi_targets | ansible.builtin.dict2items }}"
-  when: macos_nvchad_multi_path_stats.results[item.index].stat.exists == false
+  loop_control:
+    loop_var: target
 
 - name: Ensure correct file ownership for cloned NvChad directories
   ansible.builtin.file:

@@ -1,0 +1,16 @@
+---
+- name: Check if NvChad configuration target already exists
+  ansible.builtin.stat:
+    path: "{{ target.value.dest }}"
+  register: macos_nvchad_multi_path_stats
+
+- name: Clone NvChad starter repository into target configurations
+  ansible.builtin.git:
+    repo: "{{ macos_nvchad_multi_nvchad_repo_url }}"
+    dest: "{{ target.value.dest }}"
+    version: master
+    depth: 1
+    update: false
+  become: true
+  become_user: "{{ macos_nvchad_multi_user }}"
+  when: not macos_nvchad_multi_path_stats.stat.exists
