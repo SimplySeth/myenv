@@ -10,29 +10,29 @@
 
 - name: Create ~/.vim/bundle directory if it does not exist
   ansible.builtin.file:
-    path: "{{ vundle_user_home }}/.vim/bundle"
+    path: "{{ macos_vundle_install_user_home }}/.vim/bundle"
     state: directory
-    owner: "{{ vundle_user }}"
+    owner: "{{ macos_vundle_install_user }}"
     mode: '0755'
 
 - name: Clone Vundle repository into ~/.vim/bundle/Vundle.vim
   ansible.builtin.git:
-    repo: "{{ vundle_repo }}"
+    repo: "{{ macos_vundle_install_repo }}"
     dest: "{{ vundle_dest }}"
     version: master
     depth: 1
     update: true
   become: true
-  become_user: "{{ vundle_user }}"
+  become_user: "{{ macos_vundle_install_user }}"
 
 - name: Check if .vimrc exists
   ansible.builtin.stat:
-    path: "{{ vundle_user_home }}/.vimrc"
+    path: "{{ macos_vundle_install_user_home }}/.vimrc"
   register: macos_vundle_install_vimrc_stat
 
 - name: Create initial .vimrc with Vundle boilerplate if missing
   ansible.builtin.copy:
-    dest: "{{ vundle_user_home }}/.vimrc"
+    dest: "{{ macos_vundle_install_user_home }}/.vimrc"
     content: |
       set nocompatible
       filetype off
@@ -48,13 +48,13 @@
 
       call vundle#end()
       filetype plugin indent on
-    owner: "{{ vundle_user }}"
+    owner: "{{ macos_vundle_install_user }}"
     mode: '0644'
   when: not macos_vundle_install_vimrc_stat.stat.exists
 
 - name: Ensure Vundle init block exists in .vimrc if file already existed
   ansible.builtin.blockinfile:
-    path: "{{ vundle_user_home }}/.vimrc"
+    path: "{{ macos_vundle_install_user_home }}/.vimrc"
     marker: "\" {-- Ansible Vundle Boilerplate --"
     block: |
       set nocompatible
@@ -69,6 +69,6 @@
 - name: Automatically install or update plugins via Vundle in batch mode
   ansible.builtin.command: vim +PluginInstall +qall
   become: true
-  become_user: "{{ vundle_user }}"
+  become_user: "{{ macos_vundle_install_user }}"
   when: vundle_auto_install_plugins | bool
   changed_when: false
