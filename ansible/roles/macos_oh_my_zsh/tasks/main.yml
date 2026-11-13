@@ -4,54 +4,68 @@
   loop:
     - git
     - zsh
-  register: prerequisite_check
+  register: macos_oh_my_zsh_prerequisite_check
   changed_when: false
-  failed_when: prerequisite_check.rc != 0
+  failed_when: macos_oh_my_zsh_prerequisite_check.rc != 0
 
 - name: Clone Oh My Zsh repository
   ansible.builtin.git:
-    repo: "{{ oh_my_zsh_repo }}"
-    dest: "{{ oh_my_zsh_dest }}"
+    repo: "{{ macos_oh_my_zsh_repo }}"
+    dest: "{{ macos_oh_my_zsh_dest }}"
+    version: "{{ macos_oh_my_zsh_version | default('master') }}"
     depth: 1
     update: false
-  become_user: "{{ oh_my_zsh_user }}"
+  become: true
+  become_user: "{{ macos_oh_my_zsh_user }}"
 
 - name: Check if .zshrc exists
   ansible.builtin.stat:
-    path: "{{ oh_my_zsh_user_home }}/.zshrc"
-  register: zshrc_stat
+    path: "{{ macos_oh_my_zsh_user_home }}/.zshrc"
+  register: macos_oh_my_zsh_zshrc_stat
 
 - name: Create default .zshrc from template if missing
   ansible.builtin.copy:
-    src: "{{ oh_my_zsh_dest }}/templates/zshrc.zsh-template"
-    dest: "{{ oh_my_zsh_user_home }}/.zshrc"
+    src: "{{ macos_oh_my_zsh_dest }}/templates/zshrc.zsh-template"
+    dest: "{{ macos_oh_my_zsh_user_home }}/.zshrc"
     remote_src: true
     mode: '0644'
-    owner: "{{ oh_my_zsh_user }}"
-  when: not zshrc_stat.stat.exists
+    owner: "{{ macos_oh_my_zsh_user }}"
+  when: not macos_oh_my_zsh_zshrc_stat.stat.exists
 
 - name: Set ZSH_THEME in .zshrc
   ansible.builtin.lineinfile:
-    path: "{{ oh_my_zsh_user_home }}/.zshrc"
+    path: "{{ macos_oh_my_zsh_user_home }}/.zshrc"
     regexp: '^ZSH_THEME='
-    line: 'ZSH_THEME="{{ oh_my_zsh_theme }}"'
+    line: 'ZSH_THEME="{{ macos_oh_my_zsh_theme }}"'
     backup: true
 
 - name: Set plugins in .zshrc
   ansible.builtin.lineinfile:
-    path: "{{ oh_my_zsh_user_home }}/.zshrc"
+    path: "{{ macos_oh_my_zsh_user_home }}/.zshrc"
     regexp: '^plugins=\('
-    line: "plugins=({{ oh_my_zsh_plugins | join(' ') }})"
+    line: "plugins=({{ macos_oh_my_zsh_plugins | join(' ') }})"
 
 - name: Get current default shell for target user
-  ansible.builtin.command: dscl . -read /Users/{{ oh_my_zsh_user }} UserShell
-  register: current_user_shell
+  ansible.builtin.command: dscl . -read /Users/{{ macos_oh_my_zsh_user }} UserShell
+  register: macos_oh_my_zsh_current_user_shell
   changed_when: false
   failed_when: false
 
 - name: Set default shell to Zsh if required
-  ansible.builtin.command: chsh -s /bin/zsh {{ oh_my_zsh_user }}
+  ansible.builtin.command: chsh -s /bin/zsh {{ macos_oh_my_zsh_user }}
   become: true
+  changed_when: true
   when:
-    - oh_my_zsh_change_default_shell | bool
-    - "'/bin/zsh' not in current_user_shell.stdout"
+    - macos_oh_my_zsh_change_default_shell | bool
+    - "'/bin/zsh' not in macos_oh_my_zsh_current_user_shell.stdout"
+
+- name: Add default python path
+  ansible.builtin.lineinfile:
+    backup: true
+    create: true
+    line: 'export PATH="/Users/{{ macos_oh_my_zsh_user }}/Library/Python/3.9/bin:$PATH:{{ ansible_env.HOME }}/.local/bin"'
+    mode: '0644'
+    path: "{{ macos_oh_my_zsh_user_home }}/.zshrc"
+    regexp: 'export PATH=.*\.local/bin'
+    state: present
+...

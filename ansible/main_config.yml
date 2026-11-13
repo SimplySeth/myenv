@@ -21,6 +21,9 @@
     # Install brew packages
     - role: macos_brew_bundle
 
+    # Oh my zsh
+    - role: macos_oh_my_zsh
+
     # iTerm2 config
     - role: macos_iterm_config
 
@@ -32,6 +35,3 @@
 
     # Install NVChad
     - role: macos_nvchad_multi
-
-    # Install LazyVim
-    - role: macos_lazyvim
