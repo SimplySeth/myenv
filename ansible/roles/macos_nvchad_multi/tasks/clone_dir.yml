@@ -8,7 +8,7 @@
   ansible.builtin.git:
     repo: "{{ macos_nvchad_multi_nvchad_repo_url }}"
     dest: "{{ target.value.dest }}"
-    version: master
+    version: main
     depth: 1
     update: false
   become: true
