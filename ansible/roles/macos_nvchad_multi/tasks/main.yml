@@ -24,13 +24,13 @@
     state: directory
     owner: "{{ macos_nvchad_multi_user }}"
     mode: '0755'
-  loop: "{{ macos_nvchad_multi_targets }}"
+  loop: "{{ macos_nvchad_multi_targets | ansible.builtin.dict2items }}"
 
 - name: Check if NvChad configuration target already exists
   ansible.builtin.stat:
     path: "{{ item.value.dest }}"
   register: macos_nvchad_multi_path_stats
-  loop: "{{ macos_nvchad_multi_targets }}"
+  loop: "{{ macos_nvchad_multi_targets | ansible.builtin.dict2items }}"
 
 - name: Clone NvChad starter repository into target configurations
   ansible.builtin.git:
@@ -41,7 +41,7 @@
     update: false
   become: true
   become_user: "{{ macos_nvchad_multi_user }}"
-  loop: "{{ macos_nvchad_multi_targets }}"
+  loop: "{{ macos_nvchad_multi_targets | ansible.builtin.dict2items }}"
   when: not macos_nvchad_multi_path_stats.stat.exists
 
 - name: Ensure correct file ownership for cloned NvChad directories
@@ -50,11 +50,11 @@
     state: directory
     recurse: true
     owner: "{{ macos_nvchad_multi_user }}"
-  loop: "{{ macos_nvchad_multi_targets }}"
+  loop: "{{ macos_nvchad_multi_targets | ansible.builtin.dict2items }}"
 
 - name: Add NVChad variable to zsh
   ansible.builtin.lineinfile:
     path: "{{ macos_nvchad_multi_user_home }}/.zshrc"
     line: "alias {{ item.value.macos_nvchad_alias }}=\"NVIM_APPNAME=nvim-{{ item.key }} nvim\""
-  loop: "{{ macos_nvchad_multi_targets }}"
+  loop: "{{ macos_nvchad_multi_targets | ansible.builtin.dict2items }}"
   when: item.value.macos_nvchad_alias
