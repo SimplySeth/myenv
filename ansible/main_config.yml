@@ -35,3 +35,6 @@
 
     # Install NVChad
     - role: macos_nvchad_multi
+
+    # macOS preferences
+    - role: macos_prefs

@@ -1,0 +1,8 @@
+---
+- name: Copy macOS preferences
+  ansible.builtin.copy:
+    src: "files/com.apple.dock.plist"
+    dest: "{{ macos_prefs_dest }}/com.apple.dock.plist"
+    owner: "{{ macos_prefs_user }}"
+    group: "{{ macos_prefs_group }}"
+    mode: '0644'

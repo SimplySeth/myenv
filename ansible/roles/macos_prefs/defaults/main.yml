@@ -1,0 +1,4 @@
+---
+macos_prefs_dest: "{{ ansible_env.HOME }}/Library/Preferences"
+macos_prefs_user: "{{ ansible_env.LOGNAME }}"
+macos_prefs_groups: "{{ ansible_env.LOGNAME }}"
