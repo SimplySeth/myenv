@@ -42,7 +42,7 @@
   become: true
   become_user: "{{ macos_nvchad_multi_user }}"
   loop: "{{ macos_nvchad_multi_targets | ansible.builtin.dict2items }}"
-  when: not macos_nvchad_multi_path_stats.stat.exists
+  when: macos_nvchad_multi_path_stats.results[item.index].stat.exists == false
 
 - name: Ensure correct file ownership for cloned NvChad directories
   ansible.builtin.file:
