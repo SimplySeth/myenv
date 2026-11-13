@@ -8,7 +8,7 @@ macos_oh_my_zsh_repo: "https://github.com/ohmyzsh/ohmyzsh.git"
 macos_oh_my_zsh_dest: "{{ macos_oh_my_zsh_user_home }}/.oh-my-zsh"
 
 # Theme configuration
-macos_oh_my_zsh_theme: "gnzh"
+macos_oh_my_zsh_theme: "mikeh"
 
 # Plugins configuration
 macos_oh_my_zsh_plugins:
