@@ -5,6 +5,8 @@
       - neovim
       - git
     state: installed
+  register: macos_lazyvim_homebrew
+  ignore_errors: true
 
 - name: Ensure parent .config directory exists
   ansible.builtin.file:
