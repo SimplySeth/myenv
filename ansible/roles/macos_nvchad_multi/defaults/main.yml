@@ -4,7 +4,8 @@ macos_nvchad_multi_user: "{{ ansible_user_id }}"
 macos_nvchad_multi_user_home: "{{ ansible_env.HOME }}"
 
 # NvChad starter repository URL
-macos_nvchad_multi_nvchad_repo_url: "https://github.com/NvChad/starter.git"
+# macos_nvchad_multi_nvchad_repo_url: "https://github.com/NvChad/starter.git"
+macos_nvchad_multi_nvchad_repo_url: "https://github.com/NvChad/starter"
 
 # List of target configuration directories to provision NvChad into
 macos_nvchad_multi_target_configs:
