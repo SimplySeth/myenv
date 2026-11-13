@@ -1,13 +1,13 @@
 ---
 # Target user and home directory
-nvchad_user: "{{ ansible_user_id }}"
-nvchad_user_home: "{{ ansible_env.HOME }}"
+macos_nvchad_multi_user: "{{ ansible_user_id }}"
+macos_nvchad_multi_user_home: "{{ ansible_env.HOME }}"
 
 # NvChad starter repository URL
-nvchad_repo_url: "https://github.com/NvChad/starter.git"
+macos_nvchad_multi_nvchad_repo_url: "https://github.com/NvChad/starter.git"
 
 # List of target configuration directories to provision NvChad into
-nvchad_target_configs:
-  - "{{ nvchad_user_home }}/.config/nvim"
-  - "{{ nvchad_user_home }}/.config/nvim-go"
-#  - "{{ nvchad_user_home }}/.config/nvim-python"
+macos_nvchad_multi_target_configs:
+  - "{{ macos_nvchad_multi_user_home }}/.config/nvim"
+  - "{{ macos_nvchad_multi_user_home }}/.config/nvim-go"
+#  - "{{ macos_nvchad_multi_user_home }}/.config/nvim-python"

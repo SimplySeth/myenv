@@ -1,8 +1,8 @@
 ---
 - name: Install VS Code if not already installed
-  community.general.homebrew_cask:
-    name: visual-studio-code
-    state: installed
+  ansible.builtin.command:
+    cmd: brew install --cask visual-studio-code
+    creates: /Applications/Visual Studio Code.app
 
 - name: Check if deps are already installed
   ansible.builtin.command:

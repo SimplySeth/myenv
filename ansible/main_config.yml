@@ -26,3 +26,6 @@
 
     # VS Code configuration
     - role: macos_vscode_config
+
+    # Install NVChad
+    - role: macos_nvchad_multi

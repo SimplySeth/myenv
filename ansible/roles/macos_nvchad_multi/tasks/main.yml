@@ -4,32 +4,34 @@
   loop:
     - git
     - nvim
-  register: prerequisite_check
+  register: macos_nvchad_multi_prerequisite_check
   changed_when: false
-  failed_when: prerequisite_check.rc != 0
+  failed_when: macos_nvchad_multi_prerequisite_check.rc != 0
 
 - name: Ensure parent config directories exist
   ansible.builtin.file:
     path: "{{ item | dirname }}"
     state: directory
-    owner: "{{ nvchad_user }}"
+    owner: "{{ macos_nvchad_multi_user }}"
     mode: '0755'
-  loop: "{{ nvchad_target_configs }}"
+  loop: "{{ macos_nvchad_multi_target_configs }}"
 
 - name: Check if NvChad configuration target already exists
   ansible.builtin.stat:
     path: "{{ item }}"
-  register: nvchad_path_stats
-  loop: "{{ nvchad_target_configs }}"
+  register: macos_nvchad_multi_path_stats
+  loop: "{{ macos_nvchad_multi_target_configs }}"
 
 - name: Clone NvChad starter repository into target configurations
   ansible.builtin.git:
-    repo: "{{ nvchad_repo_url }}"
+    repo: "{{ macos_nvchad_multi_nvchad_repo_url }}"
     dest: "{{ item.item }}"
+    version: master
     depth: 1
     update: false
-  become_user: "{{ nvchad_user }}"
-  loop: "{{ nvchad_path_stats.results }}"
+  become: true
+  become_user: "{{ macos_nvchad_multi_user }}"
+  loop: "{{ macos_nvchad_multi_path_stats.results }}"
   when: not item.stat.exists
 
 - name: Ensure correct file ownership for cloned NvChad directories
@@ -37,5 +39,5 @@
     path: "{{ item }}"
     state: directory
     recurse: true
-    owner: "{{ nvchad_user }}"
-  loop: "{{ nvchad_target_configs }}"
+    owner: "{{ macos_nvchad_multi_user }}"
+  loop: "{{ macos_nvchad_multi_target_configs }}"
