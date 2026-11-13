@@ -1,0 +1,12 @@
+---
+- name: Copying preference file ...
+  ansible.builtin.debug:
+    msg: "{{ item.path | basename }}"
+
+- name: Copy macOS preferences
+  ansible.builtin.copy:
+    src: "{{ item.path }}"
+    dest: "{{ macos_prefs_dest }}/{{ item.path | basename }}"
+    owner: "{{ macos_prefs_user }}"
+    group: "{{ macos_prefs_group }}"
+    mode: '0644'

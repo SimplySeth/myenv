@@ -1,8 +1,15 @@
 ---
+- name: Get all plist files
+  ansible.builtin.find:
+    paths: "{{ role_path }}/files"
+    patterns: "*.plist"
+  register: macos_prefs_files
+
 - name: Copy macOS preferences
   ansible.builtin.copy:
     src: "files/com.apple.dock.plist"
-    dest: "{{ macos_prefs_dest }}/com.apple.dock.plist"
+    dest: "{{ macos_prefs_dest }}/{{ item.path | basename }}"
     owner: "{{ macos_prefs_user }}"
     group: "{{ macos_prefs_group }}"
     mode: '0644'
+  loop: "{{ macos_prefs_files.files }}"
