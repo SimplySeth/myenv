@@ -52,6 +52,8 @@ brew "yamllint"
 brew "zsh"
 # Desktop password and login vault
 cask "bitwarden"
+# Prevents macOS from sleeping
+cask "caffeine"
 # Anthropic's official Claude AI desktop app
 cask "claude"
 # Terminal-based AI coding assistant
