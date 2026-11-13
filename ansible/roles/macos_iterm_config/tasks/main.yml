@@ -1,0 +1,13 @@
+---
+- name: Ensure iTerm2 preferences directory exists
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/Library/Preferences"
+    state: directory
+    mode: '0755'
+
+- name: Copy iTerm2 configuration plist to host
+  ansible.builtin.copy:
+    src: files/com.googlecode.iterm2.plist
+    dest: "{{ ansible_env.HOME }}/Library/Preferences/com.googlecode.iterm2.plist"
+    mode: '0644'
+  register: macos_iterm_config_iterm2_config

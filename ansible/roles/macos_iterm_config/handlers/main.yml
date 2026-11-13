@@ -1,0 +1,4 @@
+---
+- name: Reload iTerm2 preferences
+  ansible.builtin.command: defaults read com.googlecode.iterm2
+  changed_when: false

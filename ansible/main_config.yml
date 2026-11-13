@@ -21,6 +21,9 @@
     # Install brew packages
     - role: macos_brew_bundle
 
+    # iTerm2 config
+    - role: macos_iterm_config
+
     # Install vundle
     - role: macos_vundle_install
 
