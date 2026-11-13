@@ -3,11 +3,11 @@ macos_lazyvim_starter_repo: "https://github.com/LazyVim/starter"
 
 macos_lazyvim_profiles:
   go:
-    alias: "nvim-go"
+    alias: "govim"
     path: "{{ ansible_env.HOME }}/.config/nvim-go"
   python:
-    alias: "nvim-python"
+    alias: "pyvim"
     path: "{{ ansible_env.HOME }}/.config/nvim-python"
   terraform:
-    alias: "nvim-terraform"
+    alias: "terravim"
     path: "{{ ansible_env.HOME }}/.config/nvim-terraform"

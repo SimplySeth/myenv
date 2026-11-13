@@ -30,3 +30,11 @@
     dest: "{{ item.value.path }}/lua/lazy.lua"
     mode: "0644"
   loop: "{{ macos_lazyvim_profiles | dict2items }}"
+
+- name: Add alias to zshrc 
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_env.HOME }}/.zshrc"
+    line: "alias {{ item.value.alias }}=\"NVIM_APPNAME=nvim-{{ item.key }} nvim\""
+    create: true
+    mode: "0644"
+  loop: "{{ macos_lazyvim_profiles | dict2items }}"
