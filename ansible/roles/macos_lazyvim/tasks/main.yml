@@ -29,6 +29,4 @@
     src: files/lazy.lua.j2
     dest: "{{ item.value.path }}/lua/lazy.lua"
     mode: "0644"
-    template_vars:
-      lang: "{{ item.key }}"
   loop: "{{ macos_lazyvim_profiles | dict2items }}"

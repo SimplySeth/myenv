@@ -24,14 +24,14 @@ require("lazy").setup({
     { "lazyvim.plugins.extras.lang.yaml" },
 {% endraw %}
 
-{% if lang == "go" %}
+{% if item.key == "go" %}
     -- Go stuff
   {% raw %}
     { import = "lazyvim.plugins.extras.lang.go" },
   {% endraw %}
 {% endif %}
 
-{% if lang == "python" %}
+{% if item.key == "python" %}
     -- Python / Ansible stuff
   {% raw %}
     { import = "lazyvim.plugins.extras.lang.python" },
@@ -39,7 +39,7 @@ require("lazy").setup({
   {% endraw %}
 {% endif %}
 
-{% if lang == "terraform" %}
+{% if item.key == "terraform" %}
     -- Terraform stuff
   {% raw %}
     { import = "lazyvim.plugins.extras.lang.terraform" },
