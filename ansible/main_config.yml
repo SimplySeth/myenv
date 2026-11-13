@@ -32,3 +32,6 @@
 
     # Install NVChad
     - role: macos_nvchad_multi
+
+    # Install LazyVim
+    - role: macos_lazyvim
