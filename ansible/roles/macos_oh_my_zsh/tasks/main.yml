@@ -68,4 +68,13 @@
     path: "{{ macos_oh_my_zsh_user_home }}/.zshrc"
     regexp: 'export PATH=.*\.local/bin'
     state: present
+
+- name: Ensure .zshrc is sourced in .zprofile
+  ansible.builtin.lineinfile:
+    path: "{{ macos_oh_my_zsh_user_home }}/.zprofile"
+    regexp: '^source.*\.zshrc'
+    line: 'source "{{ macos_oh_my_zsh_user_home }}/.zshrc"'
+    backup: true
+    create: true
+    mode: '0644'
 ...
