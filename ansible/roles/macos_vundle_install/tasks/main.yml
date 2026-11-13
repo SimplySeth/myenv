@@ -18,7 +18,7 @@
 - name: Clone Vundle repository into ~/.vim/bundle/Vundle.vim
   ansible.builtin.git:
     repo: "{{ macos_vundle_install_repo }}"
-    dest: "{{ vundle_dest }}"
+    dest: "{{ macos_vundle_install_dest }}"
     version: master
     depth: 1
     update: true
