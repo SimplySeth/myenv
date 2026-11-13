@@ -8,23 +8,13 @@
   changed_when: false
   failed_when: macos_nvchad_multi_prerequisite_check.rc != 0
 
-- name: Set the variables for each target
-  ansible.builtin.set_fact:
-    macos_nvchad_multi_targets:
-      nvim:
-        dest: "{{ macos_nvchad_multi_user_home }}/.config/nvim"
-        macos_nvchad_alias: false
-#      go:
-#        dest: "{{ macos_nvchad_multi_user_home }}/.config/nvim-go"
-#        macos_nvchad_alias: "govim"
-
-- name: Ensure parent config directories exist
-  ansible.builtin.file:
-    path: "{{ item.value.dest }}"
-    state: directory
-    owner: "{{ macos_nvchad_multi_user }}"
-    mode: '0755'
-  loop: "{{ macos_nvchad_multi_targets | ansible.builtin.dict2items }}"
+# - name: Ensure parent config directories exist
+#  ansible.builtin.file:
+#    path: "{{ item.value.dest }}"
+#    state: directory
+#    owner: "{{ macos_nvchad_multi_user }}"
+#    mode: '0755'
+#  loop: "{{ macos_nvchad_multi_targets | ansible.builtin.dict2items }}"
 
 - name: Clone NvChad starter repository into target configurations
   ansible.builtin.include_tasks: clone_dir.yml

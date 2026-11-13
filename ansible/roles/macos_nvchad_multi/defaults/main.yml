@@ -5,3 +5,8 @@ macos_nvchad_multi_user_home: "{{ ansible_env.HOME }}"
 
 # NvChad starter repository URL
 macos_nvchad_multi_nvchad_repo_url: "https://github.com/NvChad/starter"
+
+macos_nvchad_multi_targets:
+  nvim:
+    dest: "{{ macos_nvchad_multi_user_home }}/.config/nvim"
+    macos_nvchad_alias: false
