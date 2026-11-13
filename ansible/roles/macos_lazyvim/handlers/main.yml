@@ -1,0 +1,7 @@
+---
+- name: Remove starter .git directories
+  ansible.builtin.file:
+    path: "{{ item.item.value.path }}/.git"
+    state: absent
+  loop: "{{ macos_lazyvim_clones.results }}"
+  when: item.changed

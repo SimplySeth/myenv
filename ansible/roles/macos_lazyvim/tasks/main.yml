@@ -1,0 +1,32 @@
+---
+- name: Ensure Neovim and Git are installed via Homebrew
+  community.general.homebrew:
+    name:
+      - neovim
+      - git
+    state: present
+
+- name: Ensure parent .config directory exists
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.config"
+    state: directory
+    mode: "0755"
+
+- name: Clone LazyVim starter into each NVIM_APPNAME directory
+  ansible.builtin.git:
+    repo: "{{ macos_lazyvim_starter_repo }}"
+    dest: "{{ item.value.path }}"
+    version: main
+    depth: 1
+  loop: "{{ macos_lazyvim_profiles | dict2items }}"
+  register: macos_lazyvim_clones
+  notify: Remove starter .git directories
+
+- name: Drop in a default lazy.lua file from template
+  ansible.builtin.template:
+    src: files/lazy.lua.j2
+    dest: "{{ item.value.path }}/lua/lazy.lua"
+    mode: "0644"
+    template_vars:
+      lang: "{{ item.key }}"
+  loop: "{{ macos_lazyvim_profiles | dict2items }}"

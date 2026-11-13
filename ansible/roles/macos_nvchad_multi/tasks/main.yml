@@ -14,9 +14,9 @@
       nvim:
         dest: "{{ macos_nvchad_multi_user_home }}/.config/nvim"
         macos_nvchad_alias: false
-      go:
-        dest: "{{ macos_nvchad_multi_user_home }}/.config/nvim-go"
-        macos_nvchad_alias: "govim"
+#      go:
+#        dest: "{{ macos_nvchad_multi_user_home }}/.config/nvim-go"
+#        macos_nvchad_alias: "govim"
 
 - name: Ensure parent config directories exist
   ansible.builtin.file:
