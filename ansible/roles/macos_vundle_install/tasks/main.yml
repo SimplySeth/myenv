@@ -70,5 +70,5 @@
   ansible.builtin.command: vim +PluginInstall +qall
   become: true
   become_user: "{{ macos_vundle_install_user }}"
-  when: vundle_auto_install_plugins | bool
+  when: macos_vundle_install_auto_install_plugins | bool
   changed_when: false
