@@ -1,3 +1,13 @@
+{% if flavor == "gvim" %}
+" Source your main CLI vimrc configuration
+source ~/.vimrc
+
+" MacVim / GVim specific settings
+if has("gui_running")
+  set guifont=JetBrainsMono\ Nerd_Font:h16
+  set lines=40 columns=120
+endif
+{% else %}
 set nocompatible
 filetype off
 
@@ -11,7 +21,9 @@ Plugin 'elzr/vim-json'
 Bundle 'ervandew/supertab'
 Bundle 'gabrielelana/vim-markdown'
 Plugin 'itchyny/lightline.vim'
+{% raw %}
 Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+{% endraw %}
 Plugin 'Markdown-Syntax'
 Plugin 'NLKNguyen/papercolor-theme'
 Bundle 'scrooloose/nerdtree'
@@ -36,12 +48,6 @@ syntax on
 " Set theme
 set background=dark
 colorscheme PaperColor
-
-" Do something special for GVim/MacVim
-if has("gui_running") || has("gui_gtk2")
- set  guifont=Menlo\ Regular:18
- set hlsearch
-endif
 
 " Show Numbers
 set relativenumber
@@ -80,3 +86,4 @@ set noundofile
 
 " disable auto-comments
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+{% endif %}

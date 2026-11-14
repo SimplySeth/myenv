@@ -30,6 +30,11 @@
     path: "{{ macos_vundle_install_user_home }}/.vimrc"
   register: macos_vundle_install_vimrc_stat
 
+- name: Check if .gvimrc exists
+  ansible.builtin.stat:
+    path: "{{ macos_vundle_install_user_home }}/.gvimrc"
+  register: macos_vundle_install_gvimrc_stat
+
 - name: Create initial .vimrc with Vundle boilerplate if missing
   ansible.builtin.template:
     src: files/vimrc.j2
@@ -37,6 +42,16 @@
     owner: "{{ macos_vundle_install_user }}"
     mode: '0644'
   when: not macos_vundle_install_vimrc_stat.stat.exists
+
+- name: Create initial .gvimrc
+  ansible.builtin.template:
+    src: files/vimrc.j2
+    dest: "{{ macos_vundle_install_user_home }}/.gvimrc"
+    owner: "{{ macos_vundle_install_user }}"
+    mode: '0644'
+  vars:
+    flavor: gvim
+  when: not macos_vundle_install_gvimrc_stat.stat.exists
 
 - name: Automatically install or update plugins via Vundle in batch mode
   ansible.builtin.command: vim +PluginInstall +qall
