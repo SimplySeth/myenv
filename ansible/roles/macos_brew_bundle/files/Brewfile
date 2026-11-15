@@ -76,6 +76,8 @@ npm "bash-language-server"
 # This is a temporary comment preserving the tap declaration
 # from the original file.
 tap "hashicorp/tap"
+# Manage your dotfiles across multiple diverse machines, securely
+brew "chezmoi"
 # Go language server for VS Code
 vscode "golang.go"
 # Terraform extension for VS Code
@@ -104,3 +106,27 @@ vscode "samuelcolvin.jinjahtml"
 vscode "vscodevim.vim"
 # Markdown support for VS Code
 vscode "yzhang.markdown-all-in-one"
+# Commit message editor for VS Code
+vscode "adam-bender.commit-message-editor"
+# GitHub Codespaces for VS Code
+vscode "github.codespaces"
+# RemoteHub for VS Code
+vscode "github.remotehub"
+# GitHub Pull Request extension for VS Code
+vscode "github.vscode-pull-request-github"
+# Git history for VS Code
+vscode "donjayamanne.githistory"
+# GitLens for VS Code
+vscode "eamodio.gitlens"
+# Git graph for VS Code
+vscode "mhutchie.git-graph"
+# Git tags for VS Code
+vscode "howardzuo.vscode-git-tags"
+# Azure Repos for VS Code
+vscode "ms-vscode.azure-repos"
+# Remote Repositories for VS Code
+vscode "ms-vscode.remote-repositories"
+# Git & GitHub pack for VS Code
+vscode "vinirossa.vscode-gitandgithub-pack"
+# Open in GitHub for VS Code
+vscode "ziyasal.vscode-open-in-github"
