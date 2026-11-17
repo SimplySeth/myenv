@@ -2,6 +2,8 @@
 brew "ack"
 # Checks ansible playbooks for practices and behaviour
 brew "ansible-lint"
+# Manage your dotfiles across multiple diverse machines, securely
+brew "chezmoi"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # GNU Emacs text editor
@@ -16,6 +18,8 @@ brew "git"
 brew "go"
 # Packer
 brew "hashicorp/tap/packer", trusted: true
+# Terraform
+brew "hashicorp/tap/terraform", trusted: true
 # Terraform language server
 brew "hashicorp/tap/terraform-ls", trusted: true
 # GUI for vim, made for macOS
@@ -58,14 +62,18 @@ cask "caffeine"
 cask "claude"
 # Terminal-based AI coding assistant
 cask "claude-code@latest"
-# Browse, manage, inspect containers and images
+# DuckDuckGo search engine
 cask "duckduckgo"
+# Font for developers with programming ligatures
 cask "font-devicons"
+# Font for developers with programming ligatures
 cask "font-jetbrains-mono-nerd-font"
-# Browse, manage, inspect containers and images
+# Google Chrome
 cask "google-chrome"
-# Browse, manage, inspect containers and images
+# Podman Desktop GUI for managing containers and pods
 cask "podman-desktop"
+# UTM virtual machine emulator and virtualizer
+cask "utm"
 # Open-source code editor
 cask "visual-studio-code"
 # Go language server
@@ -73,19 +81,31 @@ go "golang.org/x/tools/gopls"
 # Bash language server
 npm "bash-language-server"
 # HashiCorp tap
-# This is a temporary comment preserving the tap declaration
-# from the original file.
 tap "hashicorp/tap"
-# Manage your dotfiles across multiple diverse machines, securely
-brew "chezmoi"
+# Commit message editor for VS Code
+vscode "adam-bender.commit-message-editor"
+# Git history for VS Code
+vscode "donjayamanne.githistory"
+# GitLens for VS Code
+vscode "eamodio.gitlens"
+# GitHub Codespaces for VS Code
+vscode "github.codespaces"
+# RemoteHub for VS Code
+vscode "github.remotehub"
+# GitHub Pull Request extension for VS Code
+vscode "github.vscode-pull-request-github"
 # Go language server for VS Code
 vscode "golang.go"
 # Terraform extension for VS Code
 vscode "hashicorp.terraform"
+# Git tags for VS Code
+vscode "howardzuo.vscode-git-tags"
 # VS Code extension for Ansible variable lookup
 vscode "ikbengeenrobot.ansible-variable-lookup"
 # Snippets for Ansible
 vscode "mattiasbaake.vscode-snippets-for-ansible"
+# Git graph for VS Code
+vscode "mhutchie.git-graph"
 # Python debugger for VS Code
 vscode "ms-python.debugpy"
 # Python extension for VS Code
@@ -94,6 +114,10 @@ vscode "ms-python.python"
 vscode "ms-python.vscode-pylance"
 # Python environment manager for VS Code
 vscode "ms-python.vscode-python-envs"
+# Azure Repos for VS Code
+vscode "ms-vscode.azure-repos"
+# Remote Repositories for VS Code
+vscode "ms-vscode.remote-repositories"
 # Jinja snippets
 vscode "noxiz.jinja-snippets"
 # Ansible extension for VS Code
@@ -102,31 +126,11 @@ vscode "redhat.ansible"
 vscode "redhat.vscode-yaml"
 # Jinja HTML extension
 vscode "samuelcolvin.jinjahtml"
+# Git & GitHub pack for VS Code
+vscode "vinirossa.vscode-gitandgithub-pack"
 # Vim mode for VS Code
 vscode "vscodevim.vim"
 # Markdown support for VS Code
 vscode "yzhang.markdown-all-in-one"
-# Commit message editor for VS Code
-vscode "adam-bender.commit-message-editor"
-# GitHub Codespaces for VS Code
-vscode "github.codespaces"
-# RemoteHub for VS Code
-vscode "github.remotehub"
-# GitHub Pull Request extension for VS Code
-vscode "github.vscode-pull-request-github"
-# Git history for VS Code
-vscode "donjayamanne.githistory"
-# GitLens for VS Code
-vscode "eamodio.gitlens"
-# Git graph for VS Code
-vscode "mhutchie.git-graph"
-# Git tags for VS Code
-vscode "howardzuo.vscode-git-tags"
-# Azure Repos for VS Code
-vscode "ms-vscode.azure-repos"
-# Remote Repositories for VS Code
-vscode "ms-vscode.remote-repositories"
-# Git & GitHub pack for VS Code
-vscode "vinirossa.vscode-gitandgithub-pack"
 # Open in GitHub for VS Code
 vscode "ziyasal.vscode-open-in-github"
