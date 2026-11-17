@@ -1,0 +1,224 @@
+# Search tool like grep, but optimized for programmers
+brew "ack"
+# Checks ansible playbooks for practices and behaviour
+brew "ansible-lint"
+# GNU File, Shell, and Text utilities
+brew "coreutils"
+# GNU Emacs text editor
+brew "emacs"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# Distributed revision control system
+brew "git"
+# Open source programming language to build simple/reliable/efficient software
+brew "go"
+# Packer
+brew "hashicorp/tap/packer", trusted: true
+# Terraform language server
+brew "hashicorp/tap/terraform-ls", trusted: true
+# GUI for vim, made for macOS
+brew "macvim"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
+# Open-source, cross-platform JavaScript runtime environment
+brew "node"
+# Tool for managing OCI containers and pods
+brew "podman"
+# Python version management
+brew "pyenv"
+# Pyenv plugin to manage virtualenv
+brew "pyenv-virtualenv"
+# Generic machine emulator and virtualizer
+brew "qemu"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# 7-Zip is a file archiver with a high compression ratio
+brew "sevenzip"
+# Display directories as trees (with optional color/HTML output)
+brew "tree"
+# Parser generator tool
+brew "tree-sitter-cli"
+# Go grammar for tree-sitter
+brew "tree-sitter-go"
+# Python grammar for tree-sitter
+brew "tree-sitter-python"
+# Internet file retriever
+brew "wget"
+# Linter for YAML files
+brew "yamllint"
+# UNIX shell (command interpreter)
+brew "zsh"
+# Desktop password and login vault
+cask "bitwarden"
+# Prevents macOS from sleeping
+cask "caffeine"
+# Anthropic's official Claude AI desktop app
+cask "claude"
+# Terminal-based AI coding assistant
+cask "claude-code@latest"
+# Browse, manage, inspect containers and images
+cask "duckduckgo"
+cask "font-devicons"
+cask "font-jetbrains-mono-nerd-font"
+# Browse, manage, inspect containers and images
+cask "google-chrome"
+# Browse, manage, inspect containers and images
+cask "podman-desktop"
+# Open-source code editor
+cask "visual-studio-code"
+# Go language server
+go "golang.org/x/tools/gopls"
+# Bash language server
+npm "bash-language-server"
+# HashiCorp tap
+# This is a temporary comment preserving the tap declaration
+# from the original file.
+tap "hashicorp/tap"
+# Manage your dotfiles across multiple diverse machines, securely
+brew "chezmoi"
+# Go language server for VS Code
+vscode "golang.go"
+# Terraform extension for VS Code
+vscode "hashicorp.terraform"
+# VS Code extension for Ansible variable lookup
+vscode "ikbengeenrobot.ansible-variable-lookup"
+# Snippets for Ansible
+vscode "mattiasbaake.vscode-snippets-for-ansible"
+# Python debugger for VS Code
+vscode "ms-python.debugpy"
+# Python extension for VS Code
+vscode "ms-python.python"
+# Pylance language server for Python
+vscode "ms-python.vscode-pylance"
+# Python environment manager for VS Code
+vscode "ms-python.vscode-python-envs"
+# Jinja snippets
+vscode "noxiz.jinja-snippets"
+# Ansible extension for VS Code
+vscode "redhat.ansible"
+# YAML extension for VS Code
+vscode "redhat.vscode-yaml"
+# Jinja HTML extension
+vscode "samuelcolvin.jinjahtml"
+# Vim mode for VS Code
+vscode "vscodevim.vim"
+# Markdown support for VS Code
+vscode "yzhang.markdown-all-in-one"
+# Commit message editor for VS Code
+vscode "adam-bender.commit-message-editor"
+# GitHub Codespaces for VS Code
+vscode "github.codespaces"
+# RemoteHub for VS Code
+vscode "github.remotehub"
+# GitHub Pull Request extension for VS Code
+vscode "github.vscode-pull-request-github"
+# Git history for VS Code
+vscode "donjayamanne.githistory"
+# GitLens for VS Code
+vscode "eamodio.gitlens"
+# Git graph for VS Code
+vscode "mhutchie.git-graph"
+# Git tags for VS Code
+vscode "howardzuo.vscode-git-tags"
+# Azure Repos for VS Code
+vscode "ms-vscode.azure-repos"
+# Remote Repositories for VS Code
+vscode "ms-vscode.remote-repositories"
+# Git & GitHub pack for VS Code
+vscode "vinirossa.vscode-gitandgithub-pack"
+# Open in GitHub for VS Code
+vscode "ziyasal.vscode-open-in-github"
+tap "hashicorp/tap"
+# Search tool like grep, but optimized for programmers
+brew "ack"
+# Checks ansible playbooks for practices and behaviour
+brew "ansible-lint"
+# Manage your dotfiles across multiple diverse machines, securely
+brew "chezmoi"
+# GNU File, Shell, and Text utilities
+brew "coreutils"
+# GNU Emacs text editor
+brew "emacs"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# Distributed revision control system
+brew "git"
+# Open source programming language to build simple/reliable/efficient software
+brew "go"
+# GUI for vim, made for macOS
+brew "macvim"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
+# Open-source, cross-platform JavaScript runtime environment
+brew "node"
+# Tool for managing OCI containers and pods
+brew "podman"
+# Python version management
+brew "pyenv"
+# Pyenv plugin to manage virtualenv
+brew "pyenv-virtualenv"
+# Generic machine emulator and virtualizer
+brew "qemu"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# 7-Zip is a file archiver with a high compression ratio
+brew "sevenzip"
+# Display directories as trees (with optional color/HTML output)
+brew "tree"
+# Parser generator tool
+brew "tree-sitter-cli"
+# Go grammar for tree-sitter
+brew "tree-sitter-go"
+# Python grammar for tree-sitter
+brew "tree-sitter-python"
+# Internet file retriever
+brew "wget"
+# Linter for YAML files
+brew "yamllint"
+# UNIX shell (command interpreter)
+brew "zsh"
+# Packer
+brew "hashicorp/tap/packer", trusted: true
+# Desktop password and login vault
+cask "bitwarden"
+# Anthropic's official Claude AI desktop app
+cask "claude"
+# Terminal-based AI coding assistant
+cask "claude-code@latest"
+cask "font-devicons"
+# Browse, manage, inspect containers and images
+cask "podman-desktop"
+# Open-source code editor
+cask "visual-studio-code"
+vscode "adam-bender.commit-message-editor"
+vscode "donjayamanne.githistory"
+vscode "eamodio.gitlens"
+vscode "github.codespaces"
+vscode "github.remotehub"
+vscode "github.vscode-pull-request-github"
+vscode "golang.go"
+vscode "hashicorp.terraform"
+vscode "howardzuo.vscode-git-tags"
+vscode "ikbengeenrobot.ansible-variable-lookup"
+vscode "mattiasbaake.vscode-snippets-for-ansible"
+vscode "mhutchie.git-graph"
+vscode "ms-python.debugpy"
+vscode "ms-python.python"
+vscode "ms-python.vscode-pylance"
+vscode "ms-python.vscode-python-envs"
+vscode "ms-vscode.azure-repos"
+vscode "ms-vscode.remote-repositories"
+vscode "noxiz.jinja-snippets"
+vscode "redhat.ansible"
+vscode "redhat.vscode-yaml"
+vscode "samuelcolvin.jinjahtml"
+vscode "vinirossa.vscode-gitandgithub-pack"
+vscode "vscodevim.vim"
+vscode "yzhang.markdown-all-in-one"
+vscode "ziyasal.vscode-open-in-github"
+go "golang.org/x/tools/gopls"
+npm "bash-language-server"
