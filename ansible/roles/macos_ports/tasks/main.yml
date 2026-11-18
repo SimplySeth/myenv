@@ -1,0 +1,41 @@
+---
+- name: Check for MacPorts
+  ansible.builtin.stat:
+    path: /opt/local/bin/port
+  register: macports_port
+
+- name: Import and restore the MacPorts snapshot
+  when:
+    - ansible_facts['system'] == 'Darwin'
+    - ansible_facts['architecture'] == 'x86_64'
+    - macports_port.stat.exists
+    - macports_port.stat.executable
+  become: true
+  block:
+    - name: Copy snapshot to the target
+      ansible.builtin.copy:
+        src: macports-snapshot.json
+        dest: /tmp/macports-snapshot.json
+        mode: "0644"
+
+    - name: Import snapshot
+      ansible.builtin.command:
+        argv:
+          - /opt/local/bin/port
+          - snapshot
+          - --import
+          - /tmp/macports-snapshot.json
+      register: macports_import
+      changed_when: macports_import.rc == 0
+
+    - name: Restore all ports from the imported snapshot
+      ansible.builtin.command:
+        argv:
+          - /opt/local/bin/port
+          - -N
+          - restore
+          - --last
+          - --all
+      register: macports_restore
+      changed_when: macports_restore.rc == 0
+

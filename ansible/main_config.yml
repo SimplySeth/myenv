@@ -17,9 +17,15 @@
 
     # Homebrew
     - role: macos_brew_install
+      when: ansible_architecture != "x86_64"
 
     # Install brew packages
     - role: macos_brew_bundle
+      when: ansible_architecture != "x86_64"
+
+    # MacPorts install
+    - role: macos_ports
+      when: ansible_architecture == "x86_64"
 
     # Oh my zsh
     - role: macos_oh_my_zsh
